@@ -1,4 +1,4 @@
-const timer = document.getElementById('time')
+const timer = document.querySelector('#time span')
 
 setInterval(() => {
 	timer.innerText = new Date().toLocaleString()
