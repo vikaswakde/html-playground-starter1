@@ -1,34 +1,16 @@
-// Get all keys with the class 'key'
-const keys = document.querySelectorAll(".key");
+var currentlyPlayingAudio = null;
 
-// Function to play audio
-function playAudio(key) {
-  const audioElement = document.querySelector(`audio[data-key="${key}"]`);
-  if (audioElement) {
-    audioElement.currentTime = 0; // Rewind to the start
-    audioElement.play();
+function playAudio(audioFile) {
+  // Stop the currently playing audio
+  if (currentlyPlayingAudio !== null) {
+    currentlyPlayingAudio.pause();
+    currentlyPlayingAudio.currentTime = 0;
   }
+
+  // Create and play the new audio
+  var audio = new Audio("piano-keys-music/" + audioFile);
+  audio.play();
+
+  // Set the new audio as the currently playing audio
+  currentlyPlayingAudio = audio;
 }
-
-// Event listener for keydown
-document.addEventListener("keydown", (event) => {
-  console.log("Keydown event:", event.key);
-  const key = event.key.toLowerCase();
-  const keyElement = document.getElementById(key);
-
-  if (keyElement) {
-    keyElement.classList.add("active"); // Apply the 'active' class
-    playAudio(key);
-  }
-});
-
-// Event listener for keyup
-document.addEventListener("keyup", (event) => {
-  console.log("Keyup event:", event.key);
-  const key = event.key.toLowerCase();
-  const keyElement = document.getElementById(key);
-
-  if (keyElement) {
-    keyElement.classList.remove("active"); // Remove the 'active' class
-  }
-});
